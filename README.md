@@ -3,11 +3,8 @@ Today I learned.
 공부한 내용 정리합니다. 
 - 코드스테이츠 블록체인 부트캠프 참여중 2022.02.28 ~  
 
-## Algorithm
-- Recursive Function
-
 ## HTML
-- HTML 복습
+- [HTML](HTML/html.md)
 - Layout
 
 ## CSS
@@ -28,6 +25,9 @@ Today I learned.
 - Data Flow
 - event
 
-## etc
+## Algorithm
+- Recursive Function
+
+## etc.
 - CLI
 - Git
