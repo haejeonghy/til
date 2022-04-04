@@ -1,34 +1,34 @@
 # HTML
 
 * HyperText Markup Language
-* 웹 페이지를 구성하는 마크업 언어
-* Tag들의 집합으로 구성
-    - tag : 부등호로 묶인 HTML의 기본 구성 요소 
-* open tag와 close tag로 구성
-    - self closing tag 포함
+* 웹 페이지를 구성하는 마크업 언어이다.
+* Tag들의 집합으로 구성된다.
+    - tag : 부등호로 묶인 HTML의 기본 구성 요소이다. 
+* open tag와 close tag로 구성된다. 
+    - self closing tag
 ``` HTML
     <img src=""/>
 ```
 * 트리 구조 구성
 
 ## 가장 많이 쓰이는 태그
-* div : 한 줄 차지
+* div : 한 줄을 차지
 ``` HTML
 <div></div>
 ```
-* span : 컨텐츠 크기만큼 공간 차지
+* span : 컨텐츠 크기만큼 공간을 차지 
 ``` HTML
 <span></span>     
 ```
-* img : 이미지 삽입
+* img : 이미지를 삽입
 ``` HTML
 <img src="image.jpeg"/>
 ```
-* a : 링크 삽입
+* a : 링크를 삽입 
 ``` HTML
 <a href="https://www.google.com"></a>
 ```
-  * ```target="_blank"``` 속성 추가하여 새 탭에서 웹 페이지 열기 가능
+  * ```target="_blank"``` 속성 추가하여 새 탭에서 웹 페이지 열기 
 * ul & ol & li : 하위 항목을 갖는 리스트 
 ``` HTML  
     <ul>
@@ -81,9 +81,9 @@
 * block : 줄바꿈이 되는 박스
   * ```<div>```, ```<p>```
 * inline : 크기 지정을 할 수 없는 박스
-  * width, height 속성이 적용되지 않음
+  * width, height 속성이 적용되지 않는다.
   * ```<span>```
 * inline-block : inline인 동시에 block의 특성을 가지는 박스
-  * 줄바꿈이 일어나지 않음
-  * 글자가 차지하는 만큼 너비를 가짐
-  * width, height를 사용 가능
+  * 줄바꿈이 일어나지 않는다.
+  * 글자가 차지하는 만큼 너비를 가진다.
+  * width, height를 사용 가능하다. 

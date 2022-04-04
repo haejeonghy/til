@@ -9,7 +9,7 @@
 ## NVM
 
 * Node Version Manager
-* Node.js의 다양한 버전을 쉽게 설치하고 사용할 수 있음
+* Node.js의 다양한 버전을 쉽게 설치하고 사용할 수 있다.
 
 ``` Bash
 wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash :'wget으로 설치'

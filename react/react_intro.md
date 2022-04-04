@@ -3,15 +3,15 @@
 * 프론트엔드 개발을 위한 javascript 오픈 소스 라이브러리
 * 특징
   * **선언형**
-    * html/css/js를 하나의 파일에서 작성
-    * jsx를 활용하여 직관적으로, 명시적으로 작성
+    * html/css/js를 하나의 파일에서 작성한다.
+    * jsx를 활용하여 직관적으로, 명시적으로 작성한다.
   * **컴포넌트 기반**
     * 하나의 기능 구현을 위해 여러 종류의 코드를 묶은 것
-    * 서로 독립적이고 재사용 가능하기 때문에 기능 자체에 집중하여 개발할 수 있음
+    * 서로 독립적이고 재사용 가능하기 때문에 기능 자체에 집중하여 개발할 수 있다.
   * **범용성**
     * Learn once, Write Anywhere
-    * javascript 프로젝트 어디에서든 유연하게 사용 가능
-    * react-native로 모바일 개발 가능
+    * javascript 프로젝트 어디에서든 유연하게 사용 가능하다.
+    * react-native로 모바일 개발 가능하다.
 
 ## Create React App
 
@@ -22,9 +22,9 @@
 
 ## JSX
 
-* 하나의 element에 모든 element가 포함됨
-* class 사용 시 className으로 표기
-* 내부에서 javascript 사용 시 중괄호 이용
+* 하나의 element에 모든 element가 포함된다.
+* class 사용 시 className으로 표기한다.
+* 내부에서 javascript 사용 시 중괄호 이용한다.
 ```jsx
     function App() {
         const name = 'harry potter'
@@ -35,10 +35,10 @@
         )
     }
 ```
-* react element는 대문자로 시작해야 함
+* react element는 대문자로 시작해야 한다.
   * 사용자 정의 컴포넌트
-  * 소문자로 시작하면 일반 html element로 인식
-* 조건부 렌더링은 삼항연산자 이용
+  * 소문자로 시작하면 일반 html element로 인식한다.
+* 조건부 렌더링은 삼항연산자 이용한다.
 ```jsx
     <div>
         {
@@ -46,7 +46,7 @@
         }
     </div>
 ```
-* 여러 개의 html element 표시할 때 `map()` 사용
+* 여러 개의 html element 표시할 때 `map()` 사용한다.
 ``` jsx
     const content = posts.map((post) => 
     // 반드시 element에 key 속성 추가

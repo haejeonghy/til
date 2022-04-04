@@ -1,24 +1,23 @@
 # GIT
 
 - 분산형 버전 관리 시스템
-    - 이전에 작성한 내용 보존해주는 시스템
-    - 변경 이력 보존
-- Github, gitlab, bitbucket 등 여러가지 원격 저장소 이용해서 백업, 협업 가능
-    - git repository 관리하는 클라우드 기반 서비스
-    - 협업 가능, 공유 가능,
-    - 생성된 리포지토리 백업하는 기능
-    - 오픈 소스 contribute 가능
+    - 이전에 작성한 내용을 보존해주는 시스템이다.
+    - 변경 이력을 보존한다. 
+- Github, gitlab, bitbucket 등 여러가지 원격 저장소 이용해서 백업, 협업이 가능하다. 
+    - git repository 관리하는 클라우드 기반 서비스이다.
+    - 생성된 리포지토리를 백업할 수 있다. 
+    - 오픈 소스에 contribute 할 수 있다. 
   
 ## 용어
   - 스냅샷 : 특정 시점에 생성된 백업 복사본
-  - 커밋 : 스냅샷 만들어주는 작업
+  - 커밋 : 스냅샷 만들기
   - 리포지토리 : git으로 관리되는 폴더
       - remote repository
           - 원격 저장소
-          - 작업한 코드 공유할 때 원격 저장소에 업로드해 함께 공유함
+          - 작업한 코드 공유할 때 원격 저장소에 업로드해 함께 공유한다.
       - local repository
-          - 작업은 자기 컴퓨터에서 함
-          - 원격 저장소의 소스코드 받아올 수 있음
+          - 작업은 자기 컴퓨터에서 한다.
+          - 원격 저장소의 소스코드 받아올 수 있다.
   - `fork` : 외부 원격 저장소 코드를 내 원격 저장소로 가지고 오는 작업
   - `clone` : 원격 저장소 코드를 수정하기 위해 내 로컬로 받아오는 작업
   - `push` : 로컬 리포지토리에 기록해둔 커밋을 원격 리포지토리로 업로드
@@ -35,13 +34,13 @@ $ git config --global user.email "내 이메일 주소"
 
 ## SSH
 
-- https로 깃 사용할 때 토큰 발행 접속해야 함
+- https로 깃 사용할 때 토큰 발행 접속해야 한다.
 - secure shell 줄임말
     - 보안 강화된 shell 접속
-- cli 환경에서 다른 pc에 접속하거나 요청할 때 사용
-- 비대칭키로 사용자 인증
+- cli 환경에서 다른 pc에 접속하거나 요청할 때 사용한다.
+- 비대칭키로 사용자 인증한다.
     - 키 생성 필요
-    - 비대칭키로 구성됨
+    - 비대칭키로 구성된다.
 
 ```bash
 $ ssh-keygen # 키 생성
@@ -61,8 +60,8 @@ $ git clone git@github.com:codestates/im-sprint-simple-git-workflow.git
     
 ## Gh
 
-- oauth 인증 과정에 사용
-- brew 로 설치
+- oauth 인증 과정에 사용한다.
+- brew 로 설치한다.
 
 ```bash
 ? What account do you want to log into? GitHub.com
