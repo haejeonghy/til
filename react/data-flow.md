@@ -47,4 +47,5 @@ function ChildComponent({ handleButtonClick }) {
 ```
 
 [State와 생명주기](https://ko.reactjs.org/docs/state-and-lifecycle.html)
+
 [React로 생각하기](https://ko.reactjs.org/docs/thinking-in-react.html)

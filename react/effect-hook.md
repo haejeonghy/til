@@ -41,6 +41,7 @@ bar();
     * 컴포넌트 생성 후 처음 화면 로딩
     * 컴포넌트에 새로운 props가 전달됨
     * 컴포넌트에 state가 바뀜
+  
 ``` javascript
 import { useEffect, useState } from "react";
 import "./styles.css";

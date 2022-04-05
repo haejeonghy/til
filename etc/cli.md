@@ -58,7 +58,7 @@
 
 ### 파일 내용 확인
 
-- cat
+- `cat`
     - 파일 내용 전체 출력하기
     ```bash
     cat file1 file2 file3 # 파일 여러 개 
@@ -68,7 +68,7 @@
     > 내용 입력
     cat file1 file2 > file3 # 파일 병합해서 새로운 파일 만들기
     ```
-- head
+- `head`
     - 파일 앞 부분 확인하기
     ```bash
     head -n num filename # num 수 만큼 출력
@@ -76,7 +76,7 @@
     head -q filename # 파일 여러 개 출력할 때 제목 출력하지 않음
     head -f filename # 내용 변경될 때마다 실시간 출력
     ```
-- tail
+- `tail`
     - 파일 뒷 부분 확인하기
     
     ```bash
@@ -85,9 +85,9 @@
     tail -q filename # 파일 여러 개 출력할 때 제목 출력하지 않음
     tail -f filename # 내용 변경될 때마다 실시간 출력
     ```
-- more
+- `more`
     - 너무 긴 파일이 다 나오지 않을 경우 한 페이지씩 보여주는 명령어
-- less
+- `less`
     - 한 번에 보여지는 만큼만 읽기
   
 ## Path

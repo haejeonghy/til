@@ -15,7 +15,7 @@
 
 ## Create React App
 
-* React SPA 쉽고 빠르게 개발할 수 있도록 만들어진 툴 체인
+* React SPA : 쉽고 빠르게 개발할 수 있도록 만들어진 툴 체인
 ``` bash
     npx create-react-app 프로젝트명
 ```
@@ -23,7 +23,7 @@
 ## JSX
 
 * 하나의 element에 모든 element가 포함된다.
-* class 사용 시 className으로 표기한다.
+* class 사용 시 `className`으로 표기한다.
 * 내부에서 javascript 사용 시 중괄호 이용한다.
 ```jsx
     function App() {
