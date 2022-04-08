@@ -44,11 +44,11 @@
                     </li>
                 </ul>
                 </nav>
-                {/* 바뀐 컴포넌트 보여줄 영역 */}
+                {/* 바뀐 component 보여줄 영역 */}
                 <Switch>
                     {/* 경로 설정 */}
                     <Route exact path="/">
-                        {/* 컴포넌트 연결 */}
+                        {/* component 연결 */}
                         <Home />
                     </Route>
                     <Route path="/about"> 

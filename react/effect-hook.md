@@ -38,9 +38,9 @@ bar();
 
   * 해당 함수 내에서 side effect 실행
   * `useEffect`로 렌더링 되는 경우
-    * 컴포넌트 생성 후 처음 화면 로딩
-    * 컴포넌트에 새로운 props가 전달됨
-    * 컴포넌트에 state가 바뀜
+    * component 생성 후 처음 화면 로딩
+    * component에 새로운 props가 전달됨
+    * component에 state가 바뀜
   
 ``` javascript
 import { useEffect, useState } from "react";
@@ -93,11 +93,11 @@ function Proverb({ saying }) {
   
 * 배열이 빈 배열일 경우
   * `useEffect(함수, [])`
-  * 컴포넌트가 처음 생성될 때에만 함수가 실행된다. 
+  * component가 처음 생성될 때에만 함수가 실행된다. 
   * 처음 외부 API를 통해 리소스를 받아오고 더이상 API 호출이 필요하지 않을 떄에 사용할 수 있다. 
 * 배열을 넣지 않을 경우 
   * `useEffect(함수)`
-  * 컴포넌트가 처음 생성되거나, props가 업데이트 되거나, state가 업데이트 될 때 함수가 실행된다. 
+  * component가 처음 생성되거나, props가 업데이트 되거나, state가 업데이트 될 때 함수가 실행된다. 
 
 ```javascript
 import { useEffect, useState } from "react";
