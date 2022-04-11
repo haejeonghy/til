@@ -2,6 +2,7 @@
 
 ## Side Effect
 * 함수 내에서 어떤 구현이 함수 외부에 영향을 끼치는 경우
+* 함수의 입력 외에도 함수의 결과에 영향을 미치는 요인
 
 ``` javascript
 let foo = 'hello';

@@ -37,7 +37,7 @@ function CheckboxExample() {
 export default CheckboxExample;
 ```
 
-- setState로만 변경 가능하다.
+- `setState`로만 변경 가능하다.
 - react component는 state가 변경되면 새롭게 호출되고 리렌더링된다.
 - controlled component
     - react가 state 통제할 수 있는 component
@@ -100,3 +100,38 @@ function Child(props) {
 	);
 };
 ```
+
+## react로 사고하기
+
+1. UI를 component 계층 구조로 만들기
+   1. 단일 책임 원칙 : 하나의 component는 하나의 일만 한다. 
+2. react를 정적인 버전으로 만들기
+   1. `props`를 이용하여 데이터를 넘겨준다.
+3. UI state에 대한 최소한의 표현 나타내기
+4. state가 어디 있어야 할지 찾기
+5. 역방향 데이터 흐름 추가하기
+
+### 상태 위치에 따른 구분
+
+* 로컬
+  * 특정 component 안에서만 관리되는 상태
+  * 다른 component와 데이터를 공유하지 않는 폼 상태 
+* 전역
+* 프로덕트 전체 혹은 여러 component에서 관리되는 상태 
+* 지양하는게 좋지만 경우에 따라 필요하다. 
+* 한 곳에서만 상태를 업데이트하고 서로 다른 출처에서 가져오는 것을 지양한다. 
+* 동일한 데이터는 항상 같은 곳에서 데이터를 가지고 와야한다. 
+  * 신뢰할 수 있는 단일 출처 single source of truth 
+  * 데이터 무결성 : 데이터 정확성 보장 위해 데이터 변경이나 수정시 제한 두어 안정성 저해하는 요소 막고 데이터 상태들 항상 옳게 유지하는 것
+* 사용 예: 라이트/다크모드, 국제화, undo/redo
+
+### 상태 관리 툴
+
+* react context
+* redux
+* mobx
+* 상태 관리 라이브러리
+  * 전역 상태 저장소를 제공한다. 
+  * props drilling 문제를 해결한다.
+    * props drilling : 해당 데이터를 사용하지 않는 중간 노드도 하위 component에 데이터를 전달하기 위해 props를 만들어 자식 component로 넘겨줘야 했다. 
+  * 반드시 상태 라이브러리를 써야 하는 것은 아니다. 
