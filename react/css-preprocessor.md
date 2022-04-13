@@ -50,7 +50,9 @@
   * CSS의 component 영역으로 불러들이기 위해 등장했다. 
 * 기능적(functional) 혹은 상태를 가진 component들로 부터 UI를 완전히 분리해서 사용할 수 있는 단순한 패턴을 제공한다. 
 * react component 기반 개발 환경에서 CSS의 성능 향상을 위해 탄생했다. 
-* 기존 CSS문법으로도 스타일 속성이 추가된 react component를 만들 수 있다. 
+* 기존 CSS문법으로도 스타일 속성이 추가된 react component를 만들 수 있다.
+* `styled`
+  * react component와 styled component가 충돌되지 않고 구분될 수 있다. 
 * 설치
 
 ```bash
@@ -83,6 +85,83 @@ const Button = styled.a`
   margin: 0.5rem 1rem;
   width: 11rem;
 `;
+```
+* styled component 정의는 render 메소드 박에 정의해야 한다. 
+  
+```javascript
+/* Best Practice */
+// return 문 밖에서 정의해야 한다. 
+// return 문 안에서 정의되면 component가 리렌더링 될 때마다 component가 새로 정의된다. -> 렌더링 속도 저하
+const StyledWrapper = styled.div`
+  /* ... */
+`
+
+const Wrapper = ({ message }) => {
+  return <StyledWrapper>{message}</StyledWrapper>
+}
+```
+
+* `&` 사용하여 중첩 스타일링 가능
+  * `&`을 사용하지 않으면 후손 셀렉터처럼 사용된다. 
+
+```javascript
+import styled from "styled-components";
+import React from "react";
+
+const Thing = styled.div`
+  color: blue;
+
+  &:hover {
+    color: red; // <Thing> when hovered
+  }
+
+  & ~ & {
+    background: tomato; // <Thing> as a sibling of <Thing>, but maybe not directly next to it
+  }
+
+  & + & {
+    background: lime; // <Thing> next to <Thing>
+  }
+
+  &.apple {
+    background: orange; // <Thing> tagged with an additional CSS class ".apple"
+  }
+
+  .banana & {
+    border: 1px solid; // <Thing> inside another element labeled ".banana"
+  }
+
+  .blueberry {
+    background-color: yellow; // an element labeled ".blueberry" inside <Thing> without ampersand(&)
+  }
+`;
+
+export default function App() {
+  return (
+    <React.Fragment>
+      <Thing>기본 Thing Styled-Component입니다.</Thing>
+      <Thing>
+        Thing Styled-Component와 붙어 있는 Thing Styled-Component입니다. (& + &)
+      </Thing>
+      <Thing className="apple">
+        Thing Styled-Component에 apple 클래스를 적용한 예제입니다. (&.apple)
+      </Thing>
+      <div>기본 div 태그입니다.</div>
+      <Thing>Thing Styled-Component의 형제 컴포넌트입니다. (& ~ &)</Thing>
+      <div className="banana">
+        <Thing>
+          banana 클래스를 가진 엘리먼트를 부모로 가진 Thing
+          Styled-Component입니다. (.banana &)
+        </Thing>
+      </div>
+      <Thing>
+        <span className="blueberry">
+          ampersand(&)를 사용하지 않은 예제입니다.
+        </span>
+      </Thing>
+    </React.Fragment>
+  );
+}
 ```
 
 * **특징**
@@ -129,6 +208,7 @@ const Button = styled.a`
     }
 
     ```
+    
   * Adapting based on props & Extending Styles
     * 스타일 속성을 지닌 component를 정의할 때 함수를 전달하고 그 안에서 props를 사용할 수도 있다. 
     * 해당 component는 props로 전달된 속성을 우선 적용하고, 전달되는 속성이 없다면 기본으로 설정된 속성을 적용한다. 
