@@ -43,19 +43,6 @@
     - ```cp -rf 복사하려는폴더 새폴더명```
 - ```neofetch``` 시스템 정보 확인
   
-### 파일 권한 변경
-
-* chmod
-    
-    ```bash
-    chmod MODE file # 기호 혹은 숫자 모드 (8진수) 사용하여 수정
-    chmod SYMBOLIC-MODE FILENAME #+ 권한추가 - 존재권한제거 = 기존권한 대체
-    chmod a=rwx filename #a = 전체
-    # // u 사용자 g 그룹 o 기타
-    chmod ugo=rwx filename #사용자, 그룹, 기타의 권한을 rwx로 변경
-    ```
-* unmask : 설정하지 않을 권한
-
 ### 파일 내용 확인
 
 - `cat`
@@ -162,3 +149,28 @@
     - bbb : 그룹 접근 권한
     - ccc : 특정 유저 접근 권한
 - 권한이 있으면 1, 없으면 0으로 표시하여 8진수로 표기하기도 한다.
+
+### 파일 권한 변경
+
+* chmod
+    
+    ```bash
+    chmod MODE file # 기호 혹은 숫자 모드 (8진수) 사용하여 수정
+    chmod SYMBOLIC-MODE FILENAME #+ 권한추가 - 존재권한제거 = 기존권한 대체
+    chmod a=rwx filename #a = 전체
+    # // u 사용자 g 그룹 o 기타
+    chmod ugo=rwx filename #사용자, 그룹, 기타의 권한을 rwx로 변경
+    ```
+* unmask : 설정하지 않을 권한
+
+## 환경 변수
+
+* `export`
+  * 기록된 환경변수 확인 가능
+  * 새로운 환경 변수 추가 가능
+
+```bash
+export urclass="is good"
+echo $urclass
+> is good
+```
