@@ -3,6 +3,13 @@
 ## 기본 문법
 
 * Select
+  * select 조건 실행 순서
+    1. FROM
+    2. WHERE
+    3. GROUP BY
+    4. HAVING
+    5. SELECT
+    6. ORDER BY 
 * Where
   
 ```sql
@@ -57,7 +64,41 @@ FROM 테이블_이름
 * Null Values
 * Update
 * Delete
+* Sum
+
+```sql
+-- 레코드 합 리턴한다.
+SELECT InvoiceId, SUM(UnitPrice)
+FROM invoice_items
+GROUP BY InvoiceId;
+```
+
+* Avg
+
+```sql
+-- 레코드의 평균 값을 계산한다.
+SELECT TrackId, AVG(UnitPrice)
+FROM invoice_items
+GROUP BY TrackId;
+```
+
+* Max, Min
+
+```sql
+-- 각각 레코드의 최대값과 최소값을 리턴한다. 
+SELECT CustomerId, MAX(Total), MIN(Total)
+FROM invoices
+GROUP BY CustomerId
+```
+
 * Count
+
+```sql
+-- 레코드 갯수 헤아릴 때 사용한다. 
+SELECT *, COUNT(*) FROM customers
+GROUP BY State;
+```
+
 * Like
 * Wildcards
 * Aliases
@@ -73,7 +114,23 @@ FROM 테이블_이름
 
   * Left Join
   * Right Join
-  * Group By
+* Group By
+
+```sql
+SELECT * FROM customers
+-- 그룹으로 묶어서 조회한다.
+GROUP BY State;
+```
+
+  * having 
+
+```sql
+SELECT CustomerId, AVG(Total)
+FROM invoices
+GROUP BY CustomerId
+-- group by로 조회된 결과 피털링
+HAVING AVG(Total) > 6.00
+```
 
 ## 데이터베이스 관련 용어
 

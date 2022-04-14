@@ -23,19 +23,21 @@
 ## 테이블간의 관계
 
 * 1:1
+  * 하나의 레코드가 다른 테이블의 레코드 한 개와 연결된 경우
 * 1:N
   * one to many
   * 1대 다의 관계
 * N:N
   * many to many
   * join table에서 관리한다. 
+* self referencing
 
-## ID
+## Key
 
-* 각 테이블의 레코드를 구분하는 값
+* 테이블의 각 레코드를 구분할 수 있는 값
 * 자동적으로 값이 증가한다.
-* primary key 역할을 한다. 
-
-### Foreign Key
-
-* 어떤 값을 참조하는 값
+* 각 레코드마다 고유한 값을 가진다.
+* 기본 키 primary key
+  * 해당 레코드를 구분하는 키
+* 외래 키 foreign key
+  * 다른 키를 참조하는 키
