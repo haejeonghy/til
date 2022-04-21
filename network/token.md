@@ -66,6 +66,23 @@
     * `HMACSHA256(base64UrlEncode(header) + '.' + base64UrlEncode(payload), secret);`
       * HMAC SHA256으로 암호화 할 경우
 
+### JWT 토큰 사용
+
+```javascript
+  // jsonwebtoken 라이브러리 사용하여 토큰 생성
+  const jwt = require('jsonwebtoken');
+  const token = jwt.sign(토큰에_담을_값, ACCESS_SECRET, { 옵션1: 값, 옵션2: 값, ... });
+
+  // jsonwebtoken 라이브러리 사용하여 토큰 해석
+  const jwt = require('jsonwebtoken');
+  const authorization = req.headers['authorization'];
+  // 왜 authorization.split을 사용하는지, 왜 1번째 인덱스의 값을 얻는지 console.log를
+  // 사용해 확인해보세요!
+  const token = authorization.split(' ')[1];
+  const data = jwt.verify(token, ACCESS_SECRET);
+```
+
+
 ## 토큰 기반 인증 절차
 
 1. 클라이언트가 서버에 아이디/비밀번호를 담아 로그인 요청을 보낸다.
