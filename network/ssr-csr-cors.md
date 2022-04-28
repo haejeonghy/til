@@ -12,6 +12,10 @@
 * SEO가 우선 순위가 아닌 경우 사용한다. 
 * 사용자와 상호작용이 많은 경우 사용한다. 
 
+# Next.js
+
+* SSR + CSR
+
 # CORS
 
 * Cross Origin Resource Sharing
