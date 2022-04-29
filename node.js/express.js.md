@@ -17,6 +17,11 @@ router.get('/lower', (req, res) =>{
 router.post('/lower', (req, res) =>{
   // do something
 })
+
+// 20x번대의 경우 데이터 없이 응답을 보내야 text도 전달됨
+res.status(205).end("Logged out successfully")
+// 그 외의 경우 send() 사용함
+
 ```
 
 ## Middleware
