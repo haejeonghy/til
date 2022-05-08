@@ -9,6 +9,11 @@
 * 블록을 생성하는, 특정 노드가 악의를 품고 조작된 데이터를 저장하거나 네트워크에 전파한다면 시스템 전체의 신뢰도가 떨어질 것이다.
 * 악의적인 상황이 발생하더라도 네트워크를 올바른 방향으로 이끌고자 하는 다수의 노드들이 상호 검증을 거쳐 올바른 블록 생성을 이끌어내는 프로세스와 알고리즘
 
+* 고려하여할 사항
+  * finality problem 완결성 문제
+  * 51% attack/BFT 51% 공격과 비잔틴 결함
+  * transaction cost 트랜잭션 수수료
+
 ## Proof of Work
 
 * PoW
@@ -142,3 +147,13 @@
 * Practical Byzantine Fault Tolerance
 * 네오, 질리카, 하이퍼레저, R3, ITC, 텐더민트 등에서 사용하는 합의 알고리즘
 * 여러 노드로 구성된 네트워크에서 악의적 공격을 방어하기 위해 만들어졌다. 
+
+## 합의 알고리즘의 종류
+
+* safety 와 liveness를 모두 만족시켜야 한다.
+* liveness over safety
+  * 잘못된 합의가 이루어질 수 있지만 어떻게든 합의는 한다.
+  * 블록체인 PoW
+* Safety over liveness
+  * 잘못될 가능성이 있다면 블록을 만들지 않는다. 
+  * cosmos tendermint
