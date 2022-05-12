@@ -141,7 +141,7 @@
 * ERC-1155
   * 이더리움 네트워크에서 FT와 NFT를 발행할 때 사용된다.
   * 깃헙과 web3.js를 통해 인터페이스를 제공한다.
-  * solidity로 제공ㅎ된다.
+  * solidity로 제공된다.
   * FT, NFT, SFT를 발행할 수 있다.
   * 세계 최대 NFT 마켓 openSea에서 사용된다.
 
