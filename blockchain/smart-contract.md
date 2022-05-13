@@ -248,3 +248,355 @@ if or when(이벤트 x가 실행되면) { // 조건
     * 물건이 최종 목적지에 도착을 하게 되면 그 사실을 관련 업체들에게 통지하고 스마트 컨트랙트가 자동으로 실행되어 거래업체에 돈을 지불한다.
 * 저작권 등
   * binded 온라인 저작권 소유증명서 발급 서비스
+
+## 스마트 컨트랙트가 저장되는 위치
+
+![스마트 컨트랙트 모형도](smart-contract-design.png)
+
+* 스마트 컨트랙트를 만드는 순서
+  1. 스마트 컨트랙트 코딩: 구현하고자 하는 내용을 솔리디티나 다른 언어로 코딩합니다.
+  2. 구현한 소스 코드를 컴파일: 컴파일 결과 EVM 바이트 코드가 생성됩니다.
+  3. 스마트 컨트랙트 배포:
+    스마트 컨트랙트를 배포한다는 것은 컴파일된 EVM 코드를 하나의 트랜잭션 처럼 블록에 추가시켜 블록체인에 등록시키는 작업입니다.
+    소스 컴파일 -> EVM 바이트 코드 -> 구체적인 작업은 ABI 취득 -> ABI로부터 컨트랙트 객체 생성 -> 트랜잭션 생성하여 블록에 추가
+    마이너가 해당 블록을 채굴하게 되면 블록체인에 포함됨.
+  * 스마트 컨트랙트가 블록체인에 올라가면 블록체인 상의 모든 노드는 해당 스마트 컨트랙트의 바이트 코드를 가지고 있게 된다.
+    * 각 노드, 이더리움 클라이언트는 해당 스마트 컨트랙트를 자신의 EVM에서 실행시킬 수 있다.
+    * 한 노드에서 스마트 컨트랙트의 내용을 변경시키는 명령은 트랜잭션을 발생시켜 내용 변경이 이루어져, 다른 모드 노드가 컨트랙트에 접근하면 바뀐 내용을 얻게된다.
+* 스마트 컨트랙트 코드 예시
+  * 공용 변수에 값을 변경하고 읽는 기능을 수행할 수 있다.
+
+  ```solidity
+  pragma solidity ^0.4.8; // (1) 버전 프라그마
+  // (2) 계약 선언
+  contract HelloWorld {
+  // (3) 상태 변수 선언
+  string public greeting;
+  // (4) 생성자
+  function HelloWorld(string _greeting) {
+    greeting = _greeting;
+  }
+  // (5) 메서드 선언
+  function setGreeting(string _greeting) {
+    greeting = _greeting;
+  }
+  function say() constant returns (string) {
+    return greeting;
+  }
+  }
+  ```
+
+* 소스 코드 컴파일
+  * 솔리티티 컴파일러로 컴파일 하면 EVM 바이트 코드가 생성된다.
+  * 컴파일은 Remix나 Geth의 Solidity 컴파일러로 할 수 있다.
+  * 컴파일 된 부분이 코드블록에 배포된다.
+* 스마트 컨트랙트 배포
+  * 컴파일된 바이트 코드를 블록체인에 배포하는 절차
+  * Remix로 소스 코드를 컴파일하면, 바이트 코드와 ABI도 자동으로 얻을 수 있다.
+  * Geth를 사용한다면, 바이트 코드와 ABI를 일일이 생성해야 한다.
+  * ABI 얻기
+    * Geth 콘솔에서 `eth.contract` 함수를 이용하면 ABI로 부터 스마트 컨트랙트 객체를 만들 수 있다.
+    * 이 단계는 일반적 코딩에서 클래스를 정의한 것과 유사하다.
+    * 실제 스마트 컨트랙트의 주소가 생성된게 아니다.
+    * Geth console에서 스마트 컨트랙트 객체 생성 예시 보기
+
+    ```
+    sourceCompiledContract= eth.contract(contractAbiDefinition)
+    {
+    abi: [{
+      constant: true,
+      inputs: [],
+      name: "say",
+      outputs: [{...}],
+      payable: false,
+      stateMutability: "view",
+      type: "function"
+    }, {
+      constant: false,
+      inputs: [{...}],
+      name: "setGreeting",
+      outputs: [],
+      payable: false,
+      stateMutability: "nonpayable",
+      type: "function"
+    }, {
+      constant: true,
+      inputs: [],
+      name: "greeting",
+      outputs: [{...}],
+      payable: false,
+      stateMutability: "view",
+      type: "function"
+    }, {
+      inputs: [{...}],
+      payable: false,
+      stateMutability: "nonpayable",
+      type: "constructor"
+    }],
+    eth: {
+      accounts: ["0x9751574414138b22986eb80ce2713cd2f5508c5c", "0xe37aa5cd578bb1ac568298e5621e11b8a8a113eb", "0xc94593e5164b6f4b5a2f9f0165c1b520858438de", "0x7a1809177f225053ed413743d7321fba8413a7b5"],
+      blockNumber: 1179,
+      coinbase: "0x9751574414138b22986eb80ce2713cd2f5508c5c",
+      compile: {
+      lll: function(),
+      serpent: function(),
+      solidity: function()
+    },
+      defaultAccount: undefined,
+      defaultBlock: "latest",
+      gasPrice: 20000000000,
+      hashrate: 131062,
+      mining: true,
+      pendingTransactions: [],
+      syncing: false,
+      call: function(),
+      contract: function(abi),
+      estimateGas: function(),
+      filter: function(fil, callback),
+      getAccounts: function(callback),
+      getBalance: function(),
+      getBlock: function(),
+      getBlockNumber: function(callback),
+      getBlockTransactionCount: function(),
+      getBlockUncleCount: function(),
+      getCode: function(),
+      getCoinbase: function(callback),
+      getCompilers: function(),
+      getGasPrice: function(callback),
+      getHashrate: function(callback),
+      getMining: function(callback),
+      getNatSpec: function(),
+      getPendingTransactions: function(callback),
+      getRawTransaction: function(),
+      getRawTransactionFromBlock: function(),
+      getStorageAt: function(),
+      getSyncing: function(callback),
+      getTransaction: function(),
+      getTransactionCount: function(),
+      getTransactionFromBlock: function(),
+      getTransactionReceipt: function(),
+      getUncle: function(),
+      getWork: function(),
+      iban: function(iban),
+      icapNamereg: function(),
+      isSyncing: function(callback),
+      namereg: function(),
+      resend: function(),
+      sendIBANTransaction: function(),
+      sendRawTransaction: function(),
+      sendTransaction: function(),
+      sign: function(),
+      signTransaction: function(),
+      submitTransaction: function(),
+      submitWork: function()
+    },
+    at: function(address, callback),
+    getData: function(),
+    new: function()
+    }
+    ```
+
+  * 생성한 스마트 컨트랙트 객체를 실제로 블록 내용에 포함시키고, 채굴되어 블록체인에 포함되도록 하는 과정
+    * 이 과정이 종료되어야 비로소, 생성한 컨트랙트에 접근할 수 있는 주소가 생성된다.
+    * 생성한 스마트 컨트랙스 객체(객체라고 하지만 클래스와 같이 아직 실제 데이터에 접근할 수 있는 데이터가 없는 상태)로부터 하나의 인스턴스를 만든다.
+      * 스마트 컨트랙트 최초 배포시에만 생성자에 입력될 매개변수를 넣어준다.
+        `_greeting="Hello, World"`
+      * 매개변수와 함께, 스마트 컨트랙트를 하나의 트랙잭션처럼 생성한다.
+      * 트랜잭션의 송신자, 바이트 코드, 사용될 예상 Gas양을 같이 입력한다.
+      * Geth console에서 스마트 컨트랙트 배포 예시
+
+      ```
+      > contract= sourceCompiledContract.new( _greeting, {from:eth.accounts[0], data:sourceCompiled['/tmp/geth-compile-solidity602335484:HelloWorld'].code gas:'4700000'})
+      {
+      abi: [{
+        constant: true,
+        inputs: [],
+        name: "say",
+        outputs: [{...}],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      }, {
+        constant: false,
+        inputs: [{...}],
+        name: "setGreeting",
+        outputs: [],
+        payable: false,
+        stateMutability: "nonpayable",
+        type: "function"
+      }, {
+        constant: true,
+        inputs: [],
+        name: "greeting",
+        outputs: [{...}],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      }, {
+        inputs: [{...}],
+        payable: false,
+        stateMutability: "nonpayable",
+        type: "constructor"
+      }],
+      address: undefined,
+      transactionHash: "0x99ddfd763478ce7a0d328fbc67f3c10fec377efa18a8e9c41f61321feb836cd1"
+      }
+      ```
+* 채굴
+  * 스마트 컨트랙트 배포 예시의 마지막에는, `address: undefined` 라는 부분을 볼 수 있다.
+  * 트랜잭션이 채굴을 통해 블록체인에 등록되지 않았기 때문에, 컨트랙트의 주소값이 비어있는 상태
+  * 마이너가 트랜잭션이 포함된 블록을 채굴하게 되면 비로소 스마트 컨트랙트 주소가 생성된다.
+
+  ```
+    address: "0x6f9c338bb987f1baf619697784c9457b9afa119c",
+    transactionHash: "0x99ddfd763478ce7a0d328fbc67f3c10fec377efa18a8e9c41f61321feb836cd1",
+    allEvents: function(),
+    greeting: function(),
+    say: function(),
+    setGreeting: function()
+  ```
+
+  * `address: "0x6f9c338bb987f1baf619697784c9457b9afa119c"`
+    * 생성한 스마트 컨트랙트의 주소값
+  * `transactionHash: "0x99ddfd763478ce7a0d328fbc67f3c10fec377efa18a8e9c41f61321feb836cd1"`
+    * 생성한 트랜잭션의 해시값
+    * Geth 콘솔에서 확인할 수 있다.
+  * 트랜잭션 해시와 스마트 컨트랙트의 주소값은 전혀 다른 값이다.
+  * 일반적인 송금과는 달리, 트랜잭션의 input:에 값이 있다.
+    * 스마트 컨트랙트 소스 코드를 컴파일한 바이트 코드
+    * 일반적인 거래에서는 바이트 코드가 필요없기 때문에 `input: 0x` 로 나타낸다.
+  * 수신자가 없다.
+    * 송신자만 있고, 수신자는 없다.
+    * 스마트 컨트랙트는 이것을 생성한 송신자가 특정 수신을 지정하지 않고 자신이 생성한계약 코드를 블록체인에 올린 것이기 때문이다.
+* 스마트 컨트랙트 접근 및 사용
+  * 앞서 생성한 스마트 컨트랙트가 블록체인에 올라갔으니, 이제 스마트 컨트랙트 주소를 이용하여 정보를 읽고 쓰고 할 수 있다.
+  * geth 콘솔에서 새로운 컨트랙트 객체를 만드는데 이 때는 기존에 존재하는 컨트랙트의 주소를 이용한다.
+  * 앞에서 생성한 스마트 컨트랙트의 주소값을 이용하여 contract2라는 객체를 만든다.
+  * contract2를 이용하여 스마트 컨트랙트의 공유 변수 값을 바꿀 수 있다.
+
+  ```
+  > contract2.setGreeting.sendTransaction( "Hello, Ethereum", {from:eth.accounts[0], gas:1000000})
+  "0xa6b71f81b5d6d5c71248afb0e89f34aa2e0e52f98e353899bf80166b072fed36"
+  ```
+
+  * contract2를 통해서 스마트 컨트랙트의 공유 변수 값을 바꾸는 것도 하나의 트랙잭션을 생성한다.
+    * 위 명령의 결과로 트랜잭션 "0xa6b71f81b5d6d5c71248afb0e89f34aa2e0e52f98e353899bf80166b072fed36" 새롭게 생성되었다.
+      * 이 트랙잭션이 포함된 블록이 채굴되면, 스마트 컨트랙트의 공유 변수 값이 바뀌게 된다.
+  * contract, contract2에서 공유 변수를 접근해 보면, 변경된 값이 동일하게 읽을 수 있다.
+    * 복수의 사용자가 각각 스마트 컨트랙트 객체를 만들고 해당 스마트 컨트랙트에 접근하여 값을 변경하거나 읽어 올 수 있다.
+    * 스마트 컨트랙트에 쓰는 것는 것은 트랜잭션을 발생시키지만, 값을 읽어 오는 것은 별도의 트랙잭션이 발생하지 않는다.
+    * 공유 변수 값을 읽기만 하는 경우는 트랜잭션이 발생하지 않는다.
+    * 읽는 작업은 거래라고 보기 어렵기 때문이다.
+
+    ```
+    > contract.say.call()
+    "Hello, Ethereum"
+    > contract.setGreeting.sendTransaction( "Hello, Bitcoin", {from:eth.accounts[0], gas:1000000})
+    "0xe3878aa2689efc199f1159eb8c839882206405c5fb9d3c5eebfbe719a6b49d44"
+    ```
+  * 스마트 컨트랙트가 블록체인에 올라가면 블록체인 상의 모든 노드는 해당 스마트 컨트랙트의 바이트 코드를 가지고 있게 된다.
+  * 각 노드, 이더리움 클라이언트는 해당 스마트 컨트랙트를 자신의 EVM에서 실행시킬 수 있다.
+  * 한 노드에서 스마트 컨트랙트의 내용을 변경시키는 명령은 트랜잭션을 발생시키고 내용 변경이 이루어진다.
+  * 다른 모드 노드가 컨트랙트에 접근하면 바뀐 내용을 얻게 된다.
+
+![Smart contract model diagram](smart-contract-model-diagram.png)
+
+## 스마트 컨트랙트 호출
+
+* 이더리움
+  * 스마트 컨트랙트 실행 
+    * 새로운 스마트 컨트랙트를 생성
+    * 특정 스마트 컨트랙트상의 함수를 실행
+    * 이더를 전송하는 방식 중의 하나로 실행
+    * 사용자 어카운트(EOA)에 의해서 발생한 트랜잭션이나 다른 컨트랙트에 의해서만 실행
+  * 모든 트랜잭션을 실행할 때 해당 트랜잭션의 실행 비용을 지급하도록 규정
+    * 무한반복같은 악의적인 코드를 막고, 데이타의 무결성를 지키기 위해
+      * 디도스 공격 같은 무한 실행 공격처럼, 악의적인 의도로 컨트랙트를 실행하는 걸 방지
+    * 모든 트랜잭션의 기본 실행 비용은 21,000 가스
+  * 트랜잭션 실행 비용에는 발송자 어카운트 주소에 대한 ECDSA를 위한 비용과, 트랜잭션 저장을 위한 스토리지 비용, 네트워크 대역폭 비용이 포함된다.
+* 메시지 구조체
+  * 스마트 컨트랙트간의 호출은 메시지라는 특별한 구조체를 사용하여 호출된다.
+  * 메시지는 외부 어카운트(EOA)가 아니라 컨트랙트 어카운트(CA)에 의해서만 생성된다.
+  * 함수 호출시에 다른 컨트랙트로 전달된다.
+  * 메시지는 트랜잭션과는 달리 EVM 내부에서만 존재하기 때문에 가스 비용이 발생하지 않는다.
+  * Message 구조
+
+  ```
+  type Message struct {
+    to         *common.Address // 메시지 수신처
+    from       common.Address // 메시지 발신처
+    nonce      uint64 // 거래 실행시 수행되도록 허용된 최대 트랜잭션 수행횟수
+    amount     *big.Int // 메시지와 함께 전달되는 이더(wei 단위)
+    gasLimit   uint64 // 트랜잭션 수행시 소비될 총 가스량에 대한 추정치
+    gasPrice   *big.Int // 가스 가격
+    data       []byte // 매개변수 전달시 사용되는 데이타 필드(Optional)
+    checkNonce bool
+  }
+  ```
+
+  * 메시지는 EVM내에서 컨트랙트를 실행하기 위해서 Call , CallCode , DelegateCall , StaticCall 등이 호출될때에 생성된다.
+    * Call 코드들은 공통적으로 컨트랙트 주소를 매개변수로 전달받아 이를 실행하고 처리한다.
+
+  ```
+  contract D {
+    uint public n;
+    address public sender;
+    function callSetN(address _e, uint _n) {
+      _e.call(bytes4(sha3("setN(uint256)")), _n); // E's storage is set, D is not modified 
+    }
+    function callcodeSetN(address _e, uint _n) {
+      _e.callcode(bytes4(sha3("setN(uint256)")), _n); // D's storage is set, E is not modified 
+    }
+    function delegatecallSetN(address _e, uint _n) {
+      _e.delegatecall(bytes4(sha3("setN(uint256)")), _n); // D's storage is set, E is not modified 
+    }
+  }
+  contract E {
+    uint public n;
+    address public sender;
+    function setN(uint _n) {
+      n = _n;
+      sender = msg.sender;
+      // msg.sender is D if invoked by D's callcodeSetN. None of E's storage is updated
+      // msg.sender is C if invoked by C.foo(). None of E's storage is updated
+      // the value of "this" is D, when invoked by either D's callcodeSetN or C.foo()
+    }
+  }
+  contract C {
+      function foo(D _d, E _e, uint _n) {
+          _d.delegatecallSetN(_e, _n);
+      }
+  }
+  ```
+
+  * 스마트 컨트랙트는 Solidity 언어로 프로그래밍한다.
+  * Solidity 언어로 프로그래밍된 스마트 컨트랙트는 컴파일러(solc)에 의해 바이트 코드로 컴파일된다.
+  * 컴파일된 바이트코드는 블록에 포함되어, EVM(Ethereum Virtual Machine)에 의해 실행된다.
+  * Solidity 언어 프로그래밍 스마트 컨트랙트 → 컴파일러(solc)에 의해 바이트 코드로 컴파일 → 블록에 포함 → EVM에 의해 실행
+
+* EVM
+  * Ethereum Virtual Machine
+  * 이더리움 스마트 컨트랙트의 바이트 코드를 실행하는 32바이트 스택 기반의 실행환경
+  * 스택의 최대 크기는 1024바이트
+  * 이더리움의 각 노드는 EVM을 포함하고 있으며, EVM을 통해 바이트 코드를 OP코드로 변환하고 스택기반으로 각각의 OP코드를 실행한다.
+    * Opcode
+      * 수행할 연산자의 명령어를 표시하며, ‘Operation Code’를 줄여 OP Code라 부른다.
+  * 휘발성, 비휘발성 메모리로 구성되어 있으며, 여기에 바이트 배열 형태로 스택의 항목들을 저장
+    * 비휘발성 메모리(Non-Volatile)
+      * storage : 상태(state)가 저장
+      * code : 스마트 컨트랙트의 컴파일된 바이트 코드가 저장
+    * 휘발성 메모리(Volatile)
+      * stack : OP 코드를 실행하기위한 스택영역
+      * args : 컨트랙트 호출시에 넘어오는 인자를 저장
+      * memory : Word 단위로 아이템을 저장하는 바이트 배열
+* EVM 동작 예시
+  * 1+2 를 계산하는 바이트 코드(6001600201)를 가지고 EVM의 동작을 알아본다.
+  * 바이트 코드(6001600201)를 치환하여 OP 코드로 분리하면 0x60, 0x01, 0x60, 0x02, 0x01이 된다.
+    * 0x60 : PUSH OPCODE
+    * 0x01, 0x02 : 값 1, 2
+    * 0x01 : ADD OPCODE
+  * EVM의 스택에 1,2를 Push하고 Add 연산을 수행하라는 의미
+  * EVM 도구를 사용하여 위의 바이트코드를 실행할경우
+    * 결과값 3이 스택에 넣어지는것을 확인할수 있다.
+    * OP코드표상으로 PUSH, ADD 연산의 Gas 비용은 3임을 확인할 수 있다.
+    * 해당 연산이 수행시에 3 Gas가 사용됨을 확인할 수 있다.
