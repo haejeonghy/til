@@ -179,6 +179,7 @@
 * 자료 가용성 (Data Availability)
   * 모두가 Stateless Client라면 블록의 내용을 손실할 수 있기 때문에 누군가는 State를 저장하고 있도록 적절한 보상과 검증 (Proof of Custody)가 필요하다. 
   * Fisherman 딜레마는 Erasure Coding으로 해결했다.
+  * 극복했다고 함. (HA 기준)
 * 검증 자간 효율적인 통신
   * 샤드 배정이 자주 바뀌는 상황에서 샤드 검증자들끼리의 효율적인 P2P 통신은 필수적이며, libs 2p의 Flood Sub과 Gossip Sub가 사용된다.
 * 샤드 간 비동기 통신
