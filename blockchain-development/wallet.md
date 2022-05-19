@@ -85,7 +85,7 @@ Repeat password:
 * Geth에서 롭스텐 테스트넷 이더 받고, 확인하기
 
 ```bash
-> geth console 2> /dev/null --ropsten # 접속
+> geth console 2> /dev/null --ropsten # 접속 (백그라운드에서 실행)
 
 > net.listening # 네트워크 연결 확인
 
@@ -176,3 +176,7 @@ Repeat passphrase:
     * 마스터 비밀 키로부터 파생된 비밀 키는 m, 마스터 공개키에서 파생된 공개키는 M으로 시작한다. 
       * 예를 들어, m/0은 마스터 비밀 키의 첫 번째 자식 비밀 키이고, M/0은 첫 번째 자식 공개 키가 된다. 
       * m/0/1은 마스터 비밀 키의 첫 번째 자식의 두 번째 자식 비밀 키이며, 마스터 키의 손자의 비밀 키가 된다.
+
+## chainlist
+
+* 네트워크 연결 자동으로 해주는 사이트
