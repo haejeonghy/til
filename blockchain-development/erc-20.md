@@ -6,6 +6,7 @@
   * Ethereum Improvement Proposals
     * 이더리움 네트워크의 개선안을 제안
 * EIP-20에서 논의되어 생성된 표준(Standard)
+* 토큰을 만들 수 있는 솔리디티 레퍼런스 코드
   
 ## 등장 배경
 
@@ -54,4 +55,27 @@
 
 ## 토큰 개발
 
-* urclass/section4/simpleToken.sol
+* code/simpleToken.sol
+
+## 함수
+
+* totalSupply
+  * 공급량
+  * 사용자가 이를 호출하면 전체 공급량 확인 가능
+* balanceOf
+  * 매개변수로 들어오는 주소의 토큰 잔고를 알려준다. 
+* transfer
+  * 다른 사용자에게 토큰을 전송하는 함수
+  * 매개변수로 수신자, 금액을 받는다.
+* transferFrom
+  * 보낸 사람, 받는 사람, 금액을 받는다.
+  * 남이 가지고 있는 토큰을 누군가에게 보내는 기능
+  * 보안이 중요하다
+  * 보안을 위해 approve함수와 조합해서 사용
+* approve
+  * 내 토큰을 사용할 수 있는 사람을 지정
+  * 매개변수로 사용할 사람 주소, 사용할 수 있는 양 지정 가능
+* allowance
+  * 소유자 주소, 사용자 주소를 매개변수로 입력하면 사용자가 소유자에게 승인한 토큰을 얼마나 사용할 수 있는지 알려주는 기능
+  * approve 함수랑 같이 사용
+* name, symbol, decimals
