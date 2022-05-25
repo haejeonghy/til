@@ -1,0 +1,13 @@
+* {
+    
+}
+
+body {
+    display: flex;
+}
+
+body > {
+    border-color: red;
+    border-width: thick;
+    flex: 1 1 auto;
+}
