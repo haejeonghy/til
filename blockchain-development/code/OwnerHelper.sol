@@ -46,10 +46,11 @@ contract의 구현된 기능과 interface의 추상화 기능 모두를 포함
 
 */
 abstract contract OwnerHelper {
-  	address private _owner;
+  	address private _owner; // 관리자
 
     // 관리자가 변경되었을때 이전 관리자의 주소와 새로운 관리자의 주소 로그를 남긴다.
   	event OwnershipTransferred(address indexed preOwner, address indexed nextOwner);
+    
     // 함수 실행 이전에 함수를 실행시키는 사람이 관리자인지 확인
   	modifier onlyOwner {
 		require(msg.sender == _owner, "OwnerHelper: caller is not owner");
@@ -83,8 +84,8 @@ contract SimpleToken is ERC20Interface, OwnerHelper {
     string public _symbol;
     uint8 public _decimals;
     bool public _tokenLock; // 토큰의 전체 락에 대한 처리
-    mapping (address => bool) public _personalTokenLock;
-
+    mapping (address => bool) public _personalTokenLock; // 토큰의 개인 락에 대한 처리
+ 
     constructor(string memory getName, string memory getSymbol) {
         _name = getName;
         _symbol = getSymbol;
@@ -140,12 +141,16 @@ contract SimpleToken is ERC20Interface, OwnerHelper {
     }
 
     // 다음의 코드에서 함수로 전달되는 파라미터 브라켓 뒤에 오는 onlyOwner가 예시입니다.
+    // onlyOwner를 적용하여 관리자만 락을 해제할 수 있도록 한다.
+    // 락 해제할 때 사용
     function removeTokenLock() onlyOwner public {
         require(_tokenLock == true);
         _tokenLock = false;
     }
 
     // 다음의 코드에서 함수로 전달되는 파라미터 브라켓 뒤에 오는 onlyOwner가 예시입니다.
+    // onlyOwner를 적용하여 관리자만 락을 해제할 수 있도록 한다.
+    // 토큰 받을 계정에 대해 함수 실행
     function removePersonalTokenLock(address _who) onlyOwner public {
         require(_personalTokenLock[_who] == true);
         _personalTokenLock[_who] = false;
