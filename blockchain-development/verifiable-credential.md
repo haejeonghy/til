@@ -12,6 +12,7 @@
     * 신분증의 용도(주민등록증, 운전면허증, 여권 등)
     * 신분증의 제약조건 정보(유효기관 등)
   * 디지털 세계에서는 자신의 신원과 자격을 증명하고, Credential의 유효성을 보장하기에 어렵다.
+    * 위변조, 복제 위험
 * W3C
   * Verifiable Credentials Data Model 
   * 자기주권신원(SSI, Self-Sovereign Identity)체계에서는 이를 검증가능한 크리덴셜(Verifiable Credential, VC)
@@ -22,7 +23,12 @@
 
 * Credential Metadata : Credential을 해석할 수 있도록 설명해주는 메타데이터(Metadata)
 * Claim(s): 주체에 대한 Claim이 포함
+  * 주체에 대한 정보
+  * 주민등록증의 클레임
+    * 이름, 주민등록번호, 주소, 발급 일자, 발급 주체
+  * 연결해서 정보를 구성할 수 있다.
 * Proofs : Credential을 검증가능하도록 만드는 암호학적 요소들이 포함된 증명
+
 * 이러한 기록은 블록체인 플랫폼 기반으로 한다.
 * 블록체인 상에 기록된 각 주체의 전사서명을 확인하면서, 궁극적으로 개인이 제시하고 있는 신원정보가 발급된 사실과 다르지 않다는 것을 검증할 수 있도록한다.
 * Verifiable Credential(검증가능한 크리덴셜, VC) 그래프(Graph)
