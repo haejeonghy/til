@@ -23,23 +23,26 @@ async function getAccounts() {
 async function helloWorld() {
     try {
         const abi = 
-            [
-                {
-                    "inputs": [],
-                    "name": "renderHelloWorld",
-                    "outputs": [
-                        {
-                            "internalType": "string",
-                            "name": "greeting",
-                            "type": "string"
-                        }
-                    ],
-                    "stateMutability": "pure",
-                    "type": "function"
-                }
-            ];
-        const address = '0xa2A75B428631704600BA8de9d815f5Bc672EB825';
-        Contract.setProvider('http://0.0.0.0:7545');
+        [
+            {
+                "inputs": [],
+                "name": "renderHelloWorld",
+                "outputs": [
+                    {
+                        "internalType": "string",
+                        "name": "greeting",
+                        "type": "string"
+                    }
+                ],
+                "stateMutability": "pure",
+                "type": "function"
+            }
+        ];
+        // const address = '0xa2A75B428631704600BA8de9d815f5Bc672EB825'; // 컨트랙트 주소
+        // Contract.setProvider('http://0.0.0.0:7545'); // 로컬 가나슈
+
+        const address = "0x7F324F3080163808D934a9517666c663617C014B";
+        Contract.setProvider('https://ropsten.infura.io/v3/21d3b95b8d7e4508a8d83b906f7c09a8'); // infura 사용하여 ropsten 테스트 가능
         const contract = new Contract(abi, address);
         const result = await contract.methods.renderHelloWorld().call();
         console.log(result);

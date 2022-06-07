@@ -69,32 +69,6 @@
       * EIP-1139는 이더리움 공급자 API를 통일하여 지갑 간 상호 운용이 가능하게 했다.
   * 크롬 개발자 콘솔 창에 `window.ethereum` 을 입력하면 다음과 같이 공급자 객체가 출력되는 것을 확인할 수 있다.
 
-## Infura
-
-* https://infura.io/
-* 원격 이더리움 노드를 통해 이더리움 네트워크에 접근할 수 있게 해주는 서비스
-* RPC URL과 API Key를 제공
-  * 직접 이더리움 네트워크에 접근하여 블록을 동기화하지 않아도 네트워크에 접근할 수 있다.
-  * Geth나 Parity를 사용하면 이더리움 블록체인에서 블록을 동기화해야 하기 때문에 많은 데이터를 다운로드 받아야 한다.
-* 프로젝트 디테일
-* Project ID: API Key
-* Project Secret: 프로젝트의 비밀 키
-* Endpoints: 
-  * 원격 이더리움 노드를 통해 이더리움 네트워크에 접속할 수 있는 URL
-  * `https://{network_name}.infura.io/v3/{API_Key}`
-* curl 사용하여 상호작용 가능
-* 원격 이더리움 노드를 통해 특정 계정 주소의 잔액을 확인하는 요청
-
-```bash
-curl https://ropsten.infura.io/v3/21d3b95b8d7e4508a8d83b906f7c09a8 \
- -X POST \
- -H "Content-type: application/json" \
- -d '{"jsonrpc": "2.0", "method": "eth_getBalance", "params": ["0xD74C244f3c9F5e05C0CA5344394F5A7247f0d1b9", "latest"], "id":1}'
-
-# {"jsonrpc":"2.0","id":1,"result":"0x33718baf9020ff40d"}%    
-# result -> 잔액을 wei 단위로 표시
-```
-
 ## Web3.js로 이더리움 네트워크로부터 데이터 읽기
 
 * Web3.js 설치 및 공급자 연결하기
@@ -302,3 +276,12 @@ app.get('/getblock', (req, res) => {
     })
 })
 ```
+
+## Coingecko
+
+* 암호화폐의 시가총액과 시세를 제공
+* 실시간 가격, 거래량, 과거 데이터, 컨트랙트 정보와 같은 다양한 데이터를 API 형태로 제공
+  * https://api.coingecko.com/api/v3/coins/ethereum/
+    * 이더리움 정보를 받아오는 API 엔드포인트
+    * usd, krw 등 가격 정보
+    * 실제 사용되는 가스비를 price로 계산하여 얼마가 드는지 확인하는 API를 개발하는 등, dApp 개발에 활용할 수 있다.
