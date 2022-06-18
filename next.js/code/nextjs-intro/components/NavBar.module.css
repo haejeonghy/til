@@ -1,0 +1,9 @@
+.active {
+    display: flex;
+    justify-content: space-between;
+    color: tomato;
+}
+
+.link {
+    font-size: 20px;
+}
