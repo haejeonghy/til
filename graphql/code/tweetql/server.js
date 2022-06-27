@@ -120,7 +120,15 @@ const resolvers = {
     }
 }
 
-const server = new ApolloServer({typeDefs, resolvers})
+const corsOption = {
+    origin:"http://localhost:3000",
+    credentials:true
+}
+const server = new ApolloServer({typeDefs, resolvers, csrfPrevention: true,  // see below for more about this
+cache: "bounded",
+cors: {
+  origin: ["http://localhost:3000", "http://localhost:4000"]
+},})
 server.listen().then(({url}) => {
     console.log(`Running on ${url}`)
 })
